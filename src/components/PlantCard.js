@@ -5,6 +5,8 @@ function PlantCard({ item, deleteItem, updateItemPrice }) {
   const [stock, setStock] = useState(item.stock)
   const [newValue, setNewValue] = useState(' ');
 
+ //Toggles item if is in stock or out of stock.  This also persists
+ //after change. 
   const handleClick = () => {
     // Toggle stock status and update local state
     setStock(prevStock => !prevStock);
@@ -26,6 +28,7 @@ function PlantCard({ item, deleteItem, updateItemPrice }) {
       });
   }
 
+  //Deletes item from the db.json
   const handleDelete = () => {
     fetch(`http://localhost:6001/plants/${item.id}`, {
       method: 'DELETE'
@@ -41,6 +44,7 @@ function PlantCard({ item, deleteItem, updateItemPrice }) {
     .then(() => deleteItem(item.id))
   }
 
+  //updates value in db.json
   const handleUpdateValue = () => {
     if (newValue.trim() !== '') { // Check if the value is not an empty string
       fetch(`http://localhost:6001/plants/${item.id}`, {
@@ -69,6 +73,7 @@ function PlantCard({ item, deleteItem, updateItemPrice }) {
     }
   };
 
+//Sets new value after price is updated
   const handleValueChange = (e) => {
     setNewValue(e.target.value);
   };

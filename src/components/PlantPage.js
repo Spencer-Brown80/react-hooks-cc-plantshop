@@ -8,7 +8,7 @@ function PlantPage() {
   const [search, setSearch] = useState('')
 
   
-
+//fetches data to render plants when the page loads
   useEffect(() => {
     fetch(`http://localhost:6001/plants`)
     .then(res => {
@@ -21,10 +21,12 @@ function PlantPage() {
     .then(data => setPlantItems(data))
   }, [])
 
+  //Pass updateSearch as a prop to Search.js
   const updateSearch = (searchTerm) => {
     setSearch(searchTerm);
   };
 
+  //Pass deleteItem as a prop to PlantList.js and then PlantCard.js
   const deleteItem = (id) => {
     //filter item out of state 
     setPlantItems(plantItems.filter(item => {
@@ -39,6 +41,7 @@ function PlantPage() {
     }))
   }
 
+  //Pass updateItemPrice as a prop to PageList.js and then PageCard.js
   const updateItemPrice = (id, newPrice) => {
     setPlantItems(plantItems.map(item => {
       if (item.id === id) {
@@ -47,11 +50,12 @@ function PlantPage() {
       return item; // For other items, return them as they are
     }));
   }
-
+ //Pass addItem to NewPlantForm.js
   const addItem = (newItem) => {
     setPlantItems([...plantItems, newItem])
   }
 
+  //Ensures that when searching in searchbar that it is not case-sensitive
   const filteredPlantItems = plantItems.filter(item => {
     //convert everything to lowercase
     //ask if search is in item description 

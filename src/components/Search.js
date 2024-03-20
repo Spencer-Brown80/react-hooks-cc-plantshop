@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function Search({ updateSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
+  //updates the search term 
   function handleChange(e) {
     const { value } = e.target;
     setSearchTerm(value);
